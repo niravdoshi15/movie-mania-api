@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
 router.get('/search', (req, res) => {
     const result = []
     if(req.query.search === 'Movie'){
-        MoviesSchema.find({ 'name': req.query.value }, (err, docs) => {
+        MoviesSchema.find({ 'name': { $regex: new RegExp("^" + req.query.value.toLowerCase(), "i") } }, (err, docs) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({ message: 'Unable to retrieve movies data', error: err })
@@ -54,7 +54,7 @@ router.get('/search', (req, res) => {
         });
     }
     else if (req.query.search === 'Director'){
-        MoviesSchema.find({ 'director': req.query.value }, (err, docs) => {
+        MoviesSchema.find({ 'director': { $regex: new RegExp("^" + req.query.value.toLowerCase(), "i") } }, (err, docs) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({ message: 'Unable to retrieve movies data', error: err })
