@@ -12,6 +12,7 @@ function jwt() {
             '/api/search',
             '/api/update/:id',
             '/api/genres'
+            
         ]
     });
 }
